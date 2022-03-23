@@ -16,7 +16,7 @@ public class Aiming : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) && transform.position.x > minXposition)
         {
-            transform.Translate(_speed * Time.deltaTime * -1, 0, 0);
+            transform.Translate(-_speed * Time.deltaTime, 0, 0);
         }
 
         if (Input.GetKey(KeyCode.D) && transform.position.x < maxXposition)
@@ -31,7 +31,7 @@ public class Aiming : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S) && transform.position.z > minZposition)
         {
-            transform.Translate(0, 0, _speed * Time.deltaTime * -1);
+            transform.Translate(0, 0, -_speed * Time.deltaTime);
         }
     }
 }

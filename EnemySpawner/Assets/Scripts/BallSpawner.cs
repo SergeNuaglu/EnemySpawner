@@ -5,25 +5,21 @@ using UnityEngine.Events;
 
 public class BallSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _tamplate;
+    [SerializeField] private Shooter _tamplate;
 
-    private bool _isSpawned;
-    private Shooter _shooter;
-    private GameObject _ball;
+    private Shooter _ball;
 
     private void Start()
     {
         _ball = Instantiate(_tamplate, transform.position, Quaternion.identity);
-        _shooter = _ball.GetComponent<Shooter>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _shooter.AllowToShoot();
+            _ball.AllowToShoot();
             _ball = Instantiate(_tamplate, transform.position, Quaternion.identity);
-            _shooter = _ball.GetComponent<Shooter>();
         }
     }
 }

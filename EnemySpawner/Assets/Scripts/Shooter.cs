@@ -15,7 +15,7 @@ public class Shooter : MonoBehaviour
     private bool _isShoot;
     private const string _targetTag = "Aim";
     private const string _groundTag = "Ground";
-    private float _timeBeforeDestroy = 10;
+    private float _timeBeforeDestroy = 5;
 
     private void Start()
     {
@@ -36,14 +36,15 @@ public class Shooter : MonoBehaviour
     {
         _rigidbody.isKinematic = false;
         _direction = _target.position - transform.position;
-        _isShoot = true;
-        Destroy(this.gameObject, _timeBeforeDestroy);
+        _isShoot = true;        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Destroy(this.gameObject, _timeBeforeDestroy);
+
         if (collision.collider.gameObject.tag == _groundTag)
-        {
+        {           
             _isShoot = false;
         }
 

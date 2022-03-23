@@ -7,15 +7,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform _enamyTamplate;
     [SerializeField] private Vector3[] _spawnPoints;
 
+    private WaitForSeconds _waitForTwoSeconds;
+
     private void Start()
     {
+        _waitForTwoSeconds = new WaitForSeconds(2f);
         StartCoroutine(SpawnEnemy());
     }
 
     private IEnumerator SpawnEnemy()
     {
         bool isPlay = true;
-        var waitForTwoSeconds = new WaitForSeconds(2f);
 
         for (int i = 0; isPlay; i++)
         {
@@ -26,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
                 i = 0;
             }
 
-            yield return waitForTwoSeconds;
+            yield return _waitForTwoSeconds;
         }
     }
 }
