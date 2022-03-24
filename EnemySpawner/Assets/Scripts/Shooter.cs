@@ -14,7 +14,6 @@ public class Shooter : MonoBehaviour
     private Vector3 _direction;
     private bool _isShoot;
     private const string _targetTag = "Aim";
-    private const string _groundTag = "Ground";
     private float _timeBeforeDestroy = 5;
 
     private void Start()
@@ -43,7 +42,7 @@ public class Shooter : MonoBehaviour
     {
         Destroy(this.gameObject, _timeBeforeDestroy);
 
-        if (collision.collider.gameObject.tag == _groundTag)
+        if (collision.gameObject.TryGetComponent<Ground>(out Ground ground))
         {           
             _isShoot = false;
         }
