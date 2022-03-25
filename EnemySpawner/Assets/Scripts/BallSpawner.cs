@@ -6,12 +6,14 @@ using UnityEngine.Events;
 public class BallSpawner : MonoBehaviour
 {
     [SerializeField] private Shooter _tamplate;
+    [SerializeField] private Aiming _aim;
 
     private Shooter _ball;
 
     private void Start()
     {
         _ball = Instantiate(_tamplate, transform.position, Quaternion.identity);
+        _ball.SetAim(_aim);
     }
 
     private void Update()
@@ -20,6 +22,7 @@ public class BallSpawner : MonoBehaviour
         {
             _ball.AllowToShoot();
             _ball = Instantiate(_tamplate, transform.position, Quaternion.identity);
+            _ball.SetAim(_aim);
         }
     }
 }

@@ -9,33 +9,36 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
+    private Aiming _aim;
     private Rigidbody _rigidbody;
-    private Transform _target;
     private Vector3 _direction;
     private bool _isShoot;
-    private const string _targetTag = "Aim";
     private float _timeBeforeDestroy = 5;
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();       
-        _target = GameObject.FindGameObjectWithTag(_targetTag).GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody>();
         _isShoot = false;
     }
 
     private void FixedUpdate()
-    {       
+    {
         if (_isShoot)
         {
             _rigidbody.AddForce(_direction.normalized * _speed);
-        }       
+        }
     }
 
     public void AllowToShoot()
     {
         _rigidbody.isKinematic = false;
-        _direction = _target.position - transform.position;
-        _isShoot = true;        
+        _direction = _aim.transform.position - transform.position;
+        _isShoot = true;
+    }
+
+    public void SetAim(Aiming aim)
+    {
+        _aim = aim;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,7 +46,7 @@ public class Shooter : MonoBehaviour
         Destroy(this.gameObject, _timeBeforeDestroy);
 
         if (collision.gameObject.TryGetComponent<Ground>(out Ground ground))
-        {           
+        {
             _isShoot = false;
         }
 
